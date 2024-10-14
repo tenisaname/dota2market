@@ -23,4 +23,16 @@ class Dota2Market:
         full_price = ''.join(full_price[:-2])  + '.' + end
         return full_price
     
+    def get_max_price_item(self,name_item):
+        """
+        
+        """
+        url = f"https://market.dota2.net/api/SearchItemByName/{name_item}/?key={self._key}"
+        response = requests.request("POST", url)
+        price = response.text.split(',')[-2]
+        price = price.split(':')[1]
+        full_price = list(str(price))
+        end = ''.join(full_price[-2:])
+        full_price = ''.join(full_price[:-2])  + '.' + end
+        return full_price
 
